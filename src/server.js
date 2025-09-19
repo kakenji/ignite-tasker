@@ -6,14 +6,20 @@ const server = http.createServer( async (req, res) => {
     const { method, url } = req; 
 
     // await json(req, res);
+    // console.log(url);
 
-    const route = routes.find(route => {
-        return route.method === method && route.url === url;
+    //search for the route and if it founds, return true
+    const route = routes.find(route => { //the .find method goes through the entire array like a foreach loop
+        return route.method === method && route.path === url; //returns true or false, not the route 
     })
-    // console.log(req);
+    
+    if(route){
+        console.log(route);
+        route.handler(req, res);
+    }
+
 });
 
 console.log('server running at http://localhost:3333');
 server.listen(3333);
 
-//test

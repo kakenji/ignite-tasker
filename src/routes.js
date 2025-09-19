@@ -1,4 +1,4 @@
-
+import http from 'node:http'
 
 //bring database
 export const routes = [
@@ -13,8 +13,8 @@ export const routes = [
         path: '/tasks',
         method: 'GET',
         handler: (req, res) => {
-            console.log('this route was requested')
-            res.setHeader(200).end();
+            console.log('this route was requested');
+            res.writeHead(200).end()
         }
     },
     {
