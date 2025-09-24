@@ -1,11 +1,12 @@
 import http from 'node:http'
 import { routes } from './routes.js';
+import { json } from '../src/middlewares/json.js';
 
 const server = http.createServer( async (req, res) => {
     //brings the method and url from the req
     const { method, url } = req; 
 
-    // await json(req, res);
+    await json(req, res);
     // console.log(url);
 
     //search for the route and if it founds, return true
@@ -14,7 +15,7 @@ const server = http.createServer( async (req, res) => {
     })
     
     if(route){
-        console.log(route);
+        console.log(req.body);
         route.handler(req, res);
     }
 

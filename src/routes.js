@@ -1,12 +1,23 @@
 import http from 'node:http'
 
+const database = []
+
 //bring database
 export const routes = [
     {
         path: '/tasks',
         method: 'POST',
         handler: (req, res) => {
-            //...
+            console.log(req.body);
+            const { title, description } = req.body;
+            const obj = {
+                title: title,
+                description: description,
+                createdAt: Date.now()
+            }
+
+            database.push(obj);
+            res.writeHead(201).end();
         }
     },
     {
@@ -14,7 +25,8 @@ export const routes = [
         method: 'GET',
         handler: (req, res) => {
             console.log('this route was requested');
-            res.writeHead(200).end()
+            const db = JSON.parse(database)
+            res.writeHead(200).end(db);
         }
     },
     {
